@@ -50,6 +50,7 @@ public class Library {
             }
         }
     }
+
     private static void showAvailableBooks(Book[] books, Scanner keyboard) {
         System.out.println("\n ==== Available Books ===");
 
@@ -59,42 +60,41 @@ public class Library {
                         + books[i].getId() + "| ISBN: "
                         + books[i].getIsbn() + "| Title: "
                         + books[i].getTitle());
+            }
+        }
+        System.out.println("\n Options: ");
+        System.out.println(" Check out a book by ID: ");
+        System.out.println("H - Back to Home Screen");
+        System.out.print("Please enter an option: ");
 
-                System.out.println("\n Options: ");
-                System.out.println("O - Check out a book by ID: ");
-                System.out.println("H - Back to Home Screen");
-                System.out.print("Please enter an option: ");
+        String bookChoice = keyboard.nextLine().toUpperCase();
 
-                String bookChoice = keyboard.nextLine().toUpperCase();
+        if ((!bookChoice.equals("H"))) {
+            int bookId = Integer.parseInt(bookChoice);
 
-                if ((!bookChoice.equals("X"))) {
-                    int bookId = Integer.parseInt(bookChoice);
+            System.out.println("Enter your name: ");
+            String name = keyboard.nextLine();
 
-                    System.out.println("Enter your name: ");
-                    String name = keyboard.nextLine();
+            for (Book book : books) {
+                if (book.getId() == bookId) {
+                    book.checkOut(name);
+                    System.out.println("Book check-out successful. Happy reading!");
+                    break;
 
-                    for (int i = 0; i < books.length; i++ ) {
-                        if (books[i].getId() == bookId) {
-                            books[i].checkOut(name);
-
-                        }
-                    }
                 }
-
             }
         }
     }
-
-    private static void showCheckedOutBooks(Book[] books, Scanner keyboard) {
-        for (int i = 0; i < books.length; i++) {
-            if (books[i].isCheckedOut()) {
-                System.out.println("ID: "
-                        + books[i].getId() + "| ISBN: "
-                        + books[i].getIsbn() + "| Title: "
-                        + books[i].getTitle() + "Checked out to: "
-                        + books[i].getCheckedOutTo());
+        private static void showCheckedOutBooks (Book[]books, Scanner keyboard){
+            for (Book book : books) {
+                if (book.isCheckedOut()) {
+                    System.out.println("ID: "
+                            + book.getId() + " | ISBN: "
+                            + book.getIsbn() + " | Title: "
+                            + book.getTitle() + " | Checked out to: "
+                            + book.getCheckedOutTo());
+                }
             }
-        }
             System.out.println("\n Options: ");
             System.out.println("C - Check in a book by ID");
             System.out.println("H - Back to Home Screen");
@@ -106,29 +106,27 @@ public class Library {
                 System.out.print("Please enter the Book ID to check in: ");
                 int bookId = Integer.parseInt(keyboard.nextLine());
 
-                for (int i = 0; i < books.length; i++) {
-                    if (books[i].getId() == bookId) {
-                        books[i].checkIn();
+                for (int j = 0; j < books.length; j++) {
+                    if (books[j].getId() == bookId) {
+                        books[j].checkIn();
                         System.out.println("✅ Book check-in successful");
                         break;
                     }
                 }
             }
         }
-
-    private static String displayMenu(Scanner keyboard) {
-        System.out.println("""
-                     =====================================
-                          🌞 Welcome to the Library!  📚
-                     =====================================
-                     Please select an option to get started:
-                    \s
-                     A. Available Books
-                     C. Checked Out Books
-                     X. Exit
-                \s""");
-        System.out.print("Enter your choice: ");
-        return keyboard.nextLine().toUpperCase();
-    }
+        private static String displayMenu (Scanner keyboard){
+            System.out.println("""
+                         =====================================
+                              🌞 Welcome to the Library!  📚
+                         =====================================
+                         Please select an option to get started:
+                        \s
+                         A. Available Books
+                         C. Checked Out Books
+                         X. Exit
+                    \s""");
+            System.out.print("Enter your choice: ");
+            return keyboard.nextLine().toUpperCase();
+        }
 }
-
