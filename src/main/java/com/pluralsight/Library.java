@@ -59,6 +59,28 @@ public class Library {
                         + books[i].getId() + "| ISBN: "
                         + books[i].getIsbn() + "| Title: "
                         + books[i].getTitle());
+
+                System.out.println("\n Options: ");
+                System.out.println("O - Check out a book by ID: ");
+                System.out.println("H - Back to Home Screen");
+                System.out.print("Please enter an option: ");
+
+                String bookChoice = keyboard.nextLine().toUpperCase();
+
+                if ((!bookChoice.equals("X"))) {
+                    int bookId = Integer.parseInt(bookChoice);
+
+                    System.out.println("Enter your name: ");
+                    String name = keyboard.nextLine();
+
+                    for (int i = 0; i < books.length; i++ ) {
+                        if (books[i].getId() == bookId) {
+                            books[i].checkOut(name);
+
+                        }
+                    }
+                }
+
             }
         }
     }
@@ -74,7 +96,7 @@ public class Library {
             }
         }
             System.out.println("\n Options: ");
-            System.out.println("C - Check in a book");
+            System.out.println("C - Check in a book by ID");
             System.out.println("H - Back to Home Screen");
             System.out.print("Please enter an option: ");
 
