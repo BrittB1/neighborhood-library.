@@ -11,8 +11,8 @@ public class Book {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
-        this.isCheckedOut = isCheckedOut;
-        this.checkedOutTo = checkedOutTo;
+        this.isCheckedOut = false;
+        this.checkedOutTo = "";
     }
 
     public int getId() {
@@ -56,7 +56,7 @@ public class Book {
     }
 
     public void checkOut() {
-        // this.checkedOutTo = name;
+        this.checkedOutTo = name;
         this.isCheckedOut = true;
     }
 
